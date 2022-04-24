@@ -1,27 +1,26 @@
 <template>
   <div>
-    <ul v-for="ask in asks" :key="ask">
-      <li>id: {{ ask.id }}</li>
-      <li>title: {{ ask.title }}</li>
-    </ul>
+    <p v-for="ask in asks" :key="ask">
+      <a :href="ask.url">{{ ask.title }}</a>
+      <small>{{ ask.time_ago }} by {{ ask.user }}</small>
+    </p>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
-import {fecthAskList } from '../api/index'
+import { computed } from 'vue';
+import { useStore } from 'vuex'
 
 export default {
  setup() {
-   const asks = ref([]);
-   const createAsk = () => {
-     fecthAskList()
-     .then((response)=>{
-       asks.value = response.data
-     })
-     .catch(err => console.log(err))
+   const asks = computed(() => {
+     return store.state.asks
+   });
+   const store = useStore();
+   const createApiAsk = () => {
+     store.dispatch('FETCH_ASK');
    }
-   createAsk();
+   createApiAsk();
 
 
    return {

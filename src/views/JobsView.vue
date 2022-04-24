@@ -1,31 +1,29 @@
 <template>
 <div>
-  <ul v-for="job in jobs" :key="job">
-    <li>id: {{ job.id }}</li>
-    <li>title: {{ job.title }}</li>
-  </ul>
+  <p v-for="job in jobs" :key="job">
+    <a :href="job.url">{{ job.title }}</a>
+    <small>{{ job.time_ago }}, {{ job.domain }}</small>
+  </p>
 </div>
 
 </template>
 
 <script>
-import { ref } from 'vue';
-import { fecthJobsList } from '../api/index'
+import { computed } from 'vue';
+import { useStore  } from 'vuex'
 
 export default {
   setup() {
-    const jobs = ref([]);
-    const createJobs = () => {
-      fecthJobsList()
-      .then((response) => {
-        jobs.value = response.data
-      })
-      .catch((err)=> {
-        console.log(err);
-      })
-    }
+    const jobs = computed(() =>{
+      return store.state.jobs
+    } 
+    );
+    const store = useStore();
+    const createApiJobs = () => {
+      store.dispatch('FETCH_JOBS');
 
-    createJobs();
+    }
+    createApiJobs();
 
     return {
       jobs
