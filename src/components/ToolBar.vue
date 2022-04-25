@@ -25,5 +25,12 @@ export default {
   .header .router-link-exact-active {
     color: #354953;
   }
+  a {
+    padding-right: 10px;
+    text-decoration: none;
+  }
+  a:not(:nth-child(1)) {
+    padding-left: 10px;
+  }
 
 </style>

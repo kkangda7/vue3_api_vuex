@@ -19,8 +19,18 @@ function fecthAskList() {
   return axios.get(`${config.baseUrl}ask/1.json`)
 }
 
+function fetchUserList(username) {
+  return axios.get(`${config.baseUrl}user/${username}.json`)
+}
+
+function fecthItemList(item) {
+  return axios.get(`${config.baseUrl}item/${item}.json`)
+}
+
 export {
   fetchNewsList,
   fecthJobsList,
-  fecthAskList
+  fecthAskList,
+  fetchUserList,
+  fecthItemList
 }
