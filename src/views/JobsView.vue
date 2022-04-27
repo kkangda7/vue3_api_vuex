@@ -1,18 +1,16 @@
 <template>
-<div>
-  <p v-for="job in jobs" :key="job">
-    <a :href="job.url">{{ job.title }}</a>
-    <small>{{ job.time_ago }}, {{ job.domain }}</small>
-  </p>
-</div>
-
+  <div>
+    <list-item :data="jobs"></list-item>
+  </div>
 </template>
 
 <script>
 import { computed } from 'vue';
 import { useStore  } from 'vuex'
+import ListItem from '../components/ListItem.vue';
 
 export default {
+  components: { ListItem },
   setup() {
     const jobs = computed(() =>{
       return store.state.jobs
@@ -33,5 +31,4 @@ export default {
 </script>
 
 <style>
-
 </style>

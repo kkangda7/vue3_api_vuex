@@ -1,19 +1,16 @@
 <template>
   <div>
-    <p v-for="item in news" :key="item">
-      <a :href="item.url">{{item .title}}</a>
-      <small>{{ item.time_ago }} by
-        <router-link :to="`/user/${item.user}`">{{ item. user }}</router-link> 
-      </small>
-    </p>
+    <list-item :data="news"></list-item>
   </div>
 </template>
 
 <script>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import ListItem from '../components/ListItem.vue';
 
 export default {
+  components: { ListItem },
   setup() {
     const store = useStore();
     const news = computed(() => {
@@ -27,7 +24,8 @@ export default {
     return {
       news
     }
-    
   }
 }
 </script>
+<style>
+</style>

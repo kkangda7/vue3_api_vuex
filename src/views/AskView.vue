@@ -1,21 +1,16 @@
 <template>
   <div>
-    <p v-for="ask in asks" :key="ask">
-        <router-link 
-          :to="`/item/${ask.id}`"
-        >{{ ask.title }}</router-link>
-      <small>
-        {{ ask.time_ago }} by {{ ask.user }}
-      </small>
-    </p>
+    <list-item :data="asks"></list-item>
   </div>
 </template>
 
 <script>
 import { computed } from 'vue';
 import { useStore } from 'vuex'
+import ListItem from '../components/ListItem.vue';
 
 export default {
+  components: { ListItem },
  setup() {
    const asks = computed(() => {
      return store.state.asks
@@ -35,5 +30,4 @@ export default {
 </script>
 
 <style>
-
 </style>

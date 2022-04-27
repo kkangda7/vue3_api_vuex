@@ -1,9 +1,11 @@
 <template>
   <div>
     <tool-bar></tool-bar>
-    <transition>
-      <router-view/>
-    </transition>
+   <router-view v-slot="{ Component, route }">
+      <transition name="fade">
+        <component :is="Component" :key="route.path" />
+      </transition>
+    </router-view>
   </div>
 </template>
 
@@ -22,16 +24,26 @@ body {
 }
 
 a {
+  color: #34495e;
   text-decoration: none;
 }
 
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 1s ease;
+a:hover {
+  color:#42b883;
+  text-decoration: underline;
 }
 
-.v-enter-from,
-.v-leave-to {
+a.router-link-exact-active {
+  text-decoration: underline;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 </style>
